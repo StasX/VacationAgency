@@ -4,9 +4,11 @@ services:
     build: "./mysql"
     container_name: mysql
   vacations:
-    build: path
+    build: ./vacations
     container_name: vacations
   statistics-client:
+    build: ./statistics/client
     container_name: statistics_client
   statistics-server:
+    build: ./statistics/server
     container_name: statistics_server
