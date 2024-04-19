@@ -1,0 +1,12 @@
+version: '3.4'
+services:
+  mysql:
+    build: "./mysql"
+    container_name: mysql
+  vacations:
+    build: path
+    container_name: vacations
+  statistics-client:
+    container_name: statistics_client
+  statistics-server:
+    container_name: statistics_server
