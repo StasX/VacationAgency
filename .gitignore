@@ -2,7 +2,7 @@
 
 # dependencies
 env/
-
+__pycache__/
 
 
 ## React
