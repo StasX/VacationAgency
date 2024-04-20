@@ -13,8 +13,22 @@ services:
     restart: on-failure
 
   vacations:
-    build: ./vacations
     container_name: vacations
+    hostname: vacations
+    build: 
+      context: ./vacations
+      args:
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - MYSQL_HOST=${MYSQL_HOST}
+        - MYSQL_PORT=${MYSQL_PORT}
+    links:
+      - mysql
+    depends_on:
+      - mysql
+    ports:
+      - 5000:80
   statistics-client:
     build: ./statistics/client
     container_name: statistics_client
