@@ -13,5 +13,7 @@ ENV MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
 ENV MYSQL_PORT=$MYSQL_PORT
 
 ADD vacation_agency.sql /etc/mysql/data.sql
-RUN sed -i 's/MYSQL_DATABSE/'$MYSQL_DATABASE'/g' /etc/mysql/data.sql
+#RUN sed -i 's/MYSQL_DATABSE/'$MYSQL_DATABASE'/g' /etc/mysql/data.sql
 RUN cp /etc/mysql/data.sql /docker-entrypoint-initdb.d
+
+EXPOSE $MYSQL_PORT
