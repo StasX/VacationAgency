@@ -14,10 +14,7 @@ services:
        - MYSQL_PORT=${MYSQL_PORT}
     restart: on-failure
     networks:
-      vacations-network:
-        aliases:
-         - mysql
-      statistics-network:
+      network:
         aliases:
          - mysql
     # Expose ports ( Allow connection  with MySQL Worck Bench )
@@ -46,7 +43,7 @@ services:
        - SECRET_KEY=${SECRET_KEY}
     restart: on-failure
     networks:
-      vacations-network:
+      network:
         aliases:
          - vacations
     depends_on:
@@ -71,7 +68,7 @@ services:
        - SECRET_KEY=${SECRET_KEY}
     restart: on-failure
     networks:
-      statistics-network:
+      network:
         aliases:
          - statistics
     depends_on:
@@ -90,9 +87,6 @@ services:
 #-------------------------------------------------------------------------------------------------
 
 networks:
-  vacations-network:
-    external: false
-    driver: bridge
-  statistics-network:
+  network:
     external: false
     driver: bridge
