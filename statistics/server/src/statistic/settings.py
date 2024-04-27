@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Register API app
     'api.apps.ApiConfig',
+    # Register Auth app
+    'api.apps.AuthConfig',
 
 ]
 
