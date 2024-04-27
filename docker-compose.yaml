@@ -4,23 +4,30 @@ services:
 
   mysql:
     container_name: mysql
-    build:
-      context: ./mysql
-      args:
-       - MYSQL_DATABASE=${MYSQL_DATABASE}
-       - MYSQL_USER=${MYSQL_USER}
-       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-       - MYSQL_PORT=${MYSQL_PORT}
+    image: mysql:8.3.0
+
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PORT: ${MYSQL_PORT}
     restart: on-failure
     networks:
       network:
         aliases:
          - mysql
+    # Create volumes
+    volumes:
+    # Seed sql file
+     - ./mysql:/docker-entrypoint-initdb.d
+    # Persistent data
+     - data:/var/lib/mysql
     # Expose ports ( Allow connection  with MySQL Worck Bench )
     ports:
      - 3306:3306
-    
+
+
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p${MYSQL_ROOT_PASSWORD}"]
       interval: 1m30s
@@ -90,3 +97,6 @@ networks:
   network:
     external: false
     driver: bridge
+
+volumes:
+  data:
