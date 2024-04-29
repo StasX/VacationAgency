@@ -1,4 +1,4 @@
-from django.db.models import Model, CharField, DateField, FloatField, ForeignKey, RESTRICT
+from django.db.models import Model, CharField, DateField, DecimalField, ForeignKey, RESTRICT
 from datetime import datetime
 
 
@@ -19,7 +19,7 @@ class VacationModel(Model):
     description = CharField(max_length=500)
     start_date = DateField(default=datetime.now)
     end_date = DateField(default=datetime.now)
-    price = FloatField(max_digits=7, decimal_places=2)
+    price = DecimalField(max_digits=7, decimal_places=2)
     image = CharField(max_length=50)
 
     class Meta:
