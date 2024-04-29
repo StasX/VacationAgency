@@ -1,4 +1,4 @@
-from django.db.models import Model, CharField,ForeignKey
+from django.db.models import Model, CharField,ForeignKey,RESTRICT
 
 
 class RoleModel(Model):
@@ -17,6 +17,6 @@ class UserModel(Model):
     last_name=CharField(max_length=15)
     email=CharField(max_length=30)
     password=CharField(max_length=50)
-    role_id=ForeignKey(RoleModel) 
+    role_id=ForeignKey(RoleModel, on_delete=RESTRICT) 
     class Meta:
         db_table: "users"
